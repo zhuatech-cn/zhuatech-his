@@ -37,4 +37,15 @@ class HisApiIntegrationTests {
     @Test void anonymousRequestIsRejected() throws Exception {
         mvc.perform(get("/api/workspace/tasks")).andExpect(status().isUnauthorized());
     }
+
+    @Test void adminCanEvaluateBedTurnover() throws Exception {
+        mvc.perform(post("/api/admin/bed-turnover").with(httpBasic("admin", "admin123"))
+            .contentType(MediaType.APPLICATION_JSON)
+            .content("{\"dischargedBeds\":12,\"cleaningCompleted\":7,\"isolationBeds\":2,\"incomingPatients\":9,\"averageCleaningMinutes\":75,\"staffedBeds\":100}"))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.data.readyBeds").value(5))
+            .andExpect(jsonPath("$.data.shortage").value(4))
+            .andExpect(jsonPath("$.data.pressureScore").value(87))
+            .andExpect(jsonPath("$.data.status").value("SURGE"));
+    }
 }
