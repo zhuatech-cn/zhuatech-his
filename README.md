@@ -107,3 +107,7 @@ curl -u admin:admin123 -H 'Content-Type: application/json' \
 本仓库不包含真实患者数据、真实医疗接口凭据或生产配置。请勿提交个人健康信息、访问令牌、私钥或真实业务数据。安全问题请按 [SECURITY.md](SECURITY.md) 私下报告；参与开发前请阅读 [CONTRIBUTING.md](CONTRIBUTING.md)。
 
 关键词：知华科技 HIS、医院信息系统、医院运营管理、医疗协同平台、Java 医院系统、Spring Boot HIS、Vue 医疗管理系统、上海软件定制开发。
+
+## 门诊候诊压力预测
+
+新增 `POST /api/his/insights/outpatient-queue`，结合候诊人数、医生数、服务时长、短时到达和危急患者预测队列与等待时间，输出 `NORMAL`、`REBALANCE` 或 `SURGE`。
