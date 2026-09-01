@@ -111,3 +111,7 @@ curl -u admin:admin123 -H 'Content-Type: application/json' \
 ## 门诊候诊压力预测
 
 新增 `POST /api/his/insights/outpatient-queue`，结合候诊人数、医生数、服务时长、短时到达和危急患者预测队列与等待时间，输出 `NORMAL`、`REBALANCE` 或 `SURGE`。
+
+## 企业级患者出院准备
+
+新增 `POST /api/enterprise/his/patient-discharge-readiness`，覆盖医师批准、用药、随访、危急结果、宣教、结算和床位周转，返回 `DISCHARGE / COORDINATE / BLOCKED`。详见 [出院准备说明](docs/ENTERPRISE_DISCHARGE_READINESS.md)。
